@@ -1,0 +1,335 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    /*-webkit-text-size-adjust: none;*/
+    /* prevent webkit from resizing text to fit */
+    
+    -webkit-user-select: text;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+/* Portrait layout (default) */
+
+.app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #000;
+}
+
+.hide {
+    display: none !important;
+}
+
+#loading-screen {
+    /*the loading screen*/
+    
+    height: 100%;
+    width: 100%;
+    background: #000;
+    color: #9FB4CC;
+    font-size: 400%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -webkit-transition: opacity 0.5s ease-in-out 0.1s;
+    -webkit-transition: transform 0.8s ease-in-out;
+    border-left: 10px solid #c9c9c9;
+    margin-left: -10px;
+}
+
+#loading-screen #loading-title {
+    height: 10%;
+    -webkit-transition: all 0.5s ease-in-out;
+}
+
+#loading-screen #loading-bar {
+    -webkit-transition: all 0.5s ease-in-out;
+}
+/*remove to show loading page*/
+/*
+.event {
+ display: none !important;
+}
+*/
+
+.slide-right {
+    -ms-transform: translate(1000px, 0px);
+    /* IE 9 */
+    
+    -webkit-transform: translate(1000px, 0px);
+    /* Chrome, Safari, Opera */
+    
+    transform: translate(1000px, 0px);
+}
+
+.slide-up {
+    -ms-transform: translate(0px, -1000px);
+    /* IE 9 */
+    
+    -webkit-transform: translate(0px, -1000px);
+    /* Chrome, Safari, Opera */
+    
+    transform: translate(0px, -1000px);
+}
+
+.slide-down {
+    -ms-transform: translate(0px, 1000px);
+    /* IE 9 */
+    
+    -webkit-transform: translate(0px, 1000px);
+    /* Chrome, Safari, Opera */
+    
+    transform: translate(0px, 1000px);
+}
+
+.slide-left {
+    -ms-transform: translate(-1000px, 0px);
+    /* IE 9 */
+    
+    -webkit-transform: translate(-1000px, 0px);
+    /* Chrome, Safari, Opera */
+    
+    transform: translate(-1000px, 0px);
+}
+
+.fade {
+    opacity: 0;
+}
+
+.off-canvas {
+    position: fixed;
+    left: 100vw;
+}
+
+.on-canvas {
+    position: fixed;
+    left: calc(50vw - 100px);
+    top: calc(50vh - 100px);
+}
+
+.input-area {
+    background: #000;
+    width: 100%;
+    height: 10%;
+    position: fixed;
+    bottom: 0;
+    margin: auto;
+    z-index: 0;
+    color: #9FB4CC;
+}
+
+.input-area input {
+    background: #000;
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: #9FB4CC;
+    font-size: 250%;
+}
+
+.top {
+    height: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 10px;
+    color: #9FB4CC;
+    background: #000;
+    /*background: linear-gradient(to bottom, #c9c9c9 0%, #9d9d9d 100%);*/
+}
+
+#hero-area {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+}
+
+#hero-image {
+    height: 100%;
+    width: 100%;
+    background: no-repeat fixed center/contain;
+    background-image: url(../img/solar-system.png);
+    position: absolute;
+    top: 0;
+}
+
+#hero-images {}
+
+#hero-images img {
+    width: 200px;
+    height: 200px;
+}
+
+#planet-image {
+    position: absolute;
+    left: 0;
+}
+
+#readout {
+    font-size: 200%;
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+#probably {
+    color: #444;
+    font-size: 80%;
+    font-weight: 100;
+}
+
+#planet-name {
+    color: #DB4105;
+}
+
+.slow-rotate {
+    -webkit-animation: rotate 60s linear infinite;
+}
+
+#loading-bar {
+    position: relative;
+    height: 100vw;
+    width: 100vw;
+    max-height: 80vh;
+    max-width: 80vh;
+    margin: 5vh auto;
+}
+
+#loading-earth {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    animation: rotate 2s ease-in-out infinite;
+    -webkit-animation: rotate 2s ease-in-out infinite;
+}
+
+#loading-moon {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: calc(50% - 25px);
+    left: calc(50% + 100px);
+}
+
+#moon-orbit {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    animation: orbit 4s ease-in-out infinite;
+    -webkit-animation: orbit 4s ease-in-out infinite;
+    /* Chrome, Safari, Opera */
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(120deg);
+    }
+    66% {
+        transform: rotate(240deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* Chrome, Safari, Opera */
+
+@-webkit-keyframes orbit {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    17% {
+        -webkit-transform: rotate(60deg);
+    }
+    33% {
+        -webkit-transform: rotate(120deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+    }
+    66% {
+        -webkit-transform: rotate(240deg);
+    }
+    83% {
+        -webkit-transform: rotate(300deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-earth {
+    0% {
+        transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(-120deg);
+    }
+    66% {
+        transform: rotate(-240deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+/* Chrome, Safari, Opera */
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    33% {
+        -webkit-transform: rotate(-120deg);
+    }
+    66% {
+        -webkit-transform: rotate(-240deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+    }
+}
