@@ -80,7 +80,7 @@ var planets = { /*This object stores the gravities and names of the planets*/
         gravity: 0.7809006,
         name: "Triton"
     },
-    eluto: {
+    pluto: {
         gravity: 0.656466,
         name: "Pluto"
     },
@@ -165,6 +165,7 @@ var app = {
             }
         }
         imageHolder.appendChild(newImages);
+        StatusBar.hide();
     },
 
     //When user clicks button, find acceleration and update the readout
@@ -205,18 +206,14 @@ var app = {
             }
             if (!lastPlanet || (lastPlanet.name !== closestPlanet.name)) { //if there is no last planet, or if the last planet is different from the current planet, change the background image
                 var newImage = document.getElementById(closestPlanet.name + '-img');
-                newImage.setAttribute('class', 'on-canvas slow-rotate');
+                newImage.setAttribute('class', 'on-canvas planet-slide-in');
                 if (lastPlanet) {
                     var oldImage = document.getElementById(lastPlanet.name + '-img');
-                    newImage.setAttribute('class', 'off-canvas');
+                    oldImage.setAttribute('class', 'on-canvas planet-slide-out');
+                    console.log('Planet classes: old:' + (oldImage ? oldImage.getAttribute('class') : "none") + ' + new:' + newImage.getAttribute('class'));
                 }
-
-
-                //                background.style.backgroundImage = "url(../img/" + closestPlanet.name + ".png)";
-                //                if (background.className.toString().indexOf("slow-rotate") === -1) { //only add the rotate class if it's not already there.
-                //                    background.className += " slow-rotate";
-                //                }
             }
+            console.log('Planet names: ' + (lastPlanet ? lastPlanet.name : "none") + ' + ' + closestPlanet.name);
             if (lastPlanet && (lastPlanet.name === closestPlanet.name)) { //if there is a last planet, and it's the same as the current one, add some text to the planet name.
                 var planetName = document.getElementById("planet-name"),
                     still = Math.random() > 0.5 ? ", still" : ", again"; //randomly add one string to the end of the planet name

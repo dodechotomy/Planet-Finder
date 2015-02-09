@@ -35,6 +35,7 @@
 <body>
     <div class="app">
         <div id="loading-screen">
+            <!--This div is removed once the deviceReady event happens.-->
             <div id="loading-title">Loading, please wait.</div>
             <div id="loading-bar">
                 <img id="loading-earth" src="img/earth.png">
@@ -44,12 +45,12 @@
             </div>
         </div>
         <div class="top">
-            <span id="readout">You are <span id="probably">(probably)</span> on
-            <br><span id="planet-name">Earth</span>.</span>
-            <!--            <span id="readout"></span>-->
+            <span id="readout"><!--This span will be filled with the readout of the accelerometer results.--></span>
         </div>
         <div id="hero-area">
-            <div id="hero-image"></div>
+            <div id="hero-image">
+                <!--This div is filled with all of the planet images. id: "planetName-img" -->
+            </div>
         </div>
         <div class="input-area">
             <input type="button" id="updateButton" value="Where am I?">
@@ -59,8 +60,6 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
-        StatusBar.hide();
-        //app.onDeviceReady();
     </script>
 </body>
 

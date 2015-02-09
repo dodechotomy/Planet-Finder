@@ -25,7 +25,8 @@
 body {
     -webkit-touch-callout: none;
     /* prevent callout to copy image, etc when tap to hold */
-    /*-webkit-text-size-adjust: none;*/
+    
+    -webkit-text-size-adjust: none;
     /* prevent webkit from resizing text to fit */
     
     -webkit-user-select: text;
@@ -37,10 +38,13 @@ body {
     margin: 0px;
     padding: 0px;
     width: 100%;
+    overflow: hidden;
+    /*Prevents a bug when switching between landscape and portrait*/
 }
-/* Portrait layout (default) */
 
 .app {
+    /*Wraps the whole app, fitting to screen*/
+    
     position: absolute;
     top: 0;
     left: 0;
@@ -50,12 +54,8 @@ body {
     background: #000;
 }
 
-.hide {
-    display: none !important;
-}
-
 #loading-screen {
-    /*the loading screen*/
+    /*The loading screen. This is not used after the deviceReady event fires. Will fade in opacity to disappear.*/
     
     height: 100%;
     width: 100%;
@@ -63,7 +63,7 @@ body {
     color: #9FB4CC;
     font-size: 400%;
     position: fixed;
-    z-index: 2;
+    z-index: 4;
     top: 0;
     left: 0;
     -webkit-transition: all 0.4s ease;
@@ -72,36 +72,32 @@ body {
     transition: all 0.4s ease;
     -webkit-transition: opacity 0.5s ease-in-out 0.1s;
     -webkit-transition: transform 0.8s ease-in-out;
-    border-left: 10px solid #c9c9c9;
-    margin-left: -10px;
 }
 
 #loading-screen #loading-title {
+    /*The title on the loading screen. Will slide up to disappear.*/
+    
     height: 10%;
     -webkit-transition: all 0.5s ease-in-out;
+    text-align: center;
 }
 
 #loading-screen #loading-bar {
+    /*The graphics on the loading screen. Will slide down to disappear.*/
+    
     -webkit-transition: all 0.5s ease-in-out;
 }
-/*remove to show loading page*/
-/*
-.event {
- display: none !important;
-}
-*/
-
-.slide-right {
+/*.slide-right {
     -ms-transform: translate(1000px, 0px);
-    /* IE 9 */
     
     -webkit-transform: translate(1000px, 0px);
-    /* Chrome, Safari, Opera */
     
     transform: translate(1000px, 0px);
-}
+}*/
 
 .slide-up {
+    /*Used by the loading title*/
+    
     -ms-transform: translate(0px, -1000px);
     /* IE 9 */
     
@@ -112,6 +108,8 @@ body {
 }
 
 .slide-down {
+    /*Used by the loading graphics*/
+    
     -ms-transform: translate(0px, 1000px);
     /* IE 9 */
     
@@ -120,44 +118,68 @@ body {
     
     transform: translate(0px, 1000px);
 }
-
+/*
 .slide-left {
     -ms-transform: translate(-1000px, 0px);
-    /* IE 9 */
     
     -webkit-transform: translate(-1000px, 0px);
-    /* Chrome, Safari, Opera */
     
     transform: translate(-1000px, 0px);
-}
+}*/
 
 .fade {
+    /*Used by the loading background*/
+    
     opacity: 0;
 }
 
 .off-canvas {
+    /*Used by the planet images before they are needed*/
+    
     position: fixed;
-    left: 100vw;
+    left: calc(50% - 100px);
+    bottom: -300px;
+    z-index: 0;
 }
 
 .on-canvas {
-    position: fixed;
-    left: calc(50vw - 100px);
-    top: calc(50vh - 100px);
+    /*Used by the planet images once needed.*/
+    
+    position: absolute;
+    left: calc(50% - 100px);
+    bottom: calc(50% - 100px);
+    z-index: 1;
+    -webkit-transition: bottom .3s ease-in-out;
+    -moz-transition: bottom .3s ease-in-out;
+    -o-transition: bottom .3s ease-in-out;
+    transition: bottom .3s ease-in-out;
+    -webkit-animation: rotate 60s linear infinite;
+}
+
+.planet-slide-in {
+    bottom: calc(50% - 100px);
+}
+
+.planet-slide-out {
+    bottom: -300px;
 }
 
 .input-area {
+    /*Background of the "Where am I?" button.*/
+    
     background: #000;
     width: 100%;
     height: 10%;
     position: fixed;
     bottom: 0;
     margin: auto;
-    z-index: 0;
+    z-index: 2;
     color: #9FB4CC;
 }
 
 .input-area input {
+    /*Text of the "Where am I?" button.*/
+    
     background: #000;
     border: none;
     width: 100%;
@@ -167,6 +189,9 @@ body {
 }
 
 .top {
+    /*The title of the readout.*/
+    
+    text-align: center;
     height: auto;
     position: fixed;
     top: 0;
@@ -175,18 +200,20 @@ body {
     padding: 10px;
     color: #9FB4CC;
     background: #000;
-    /*background: linear-gradient(to bottom, #c9c9c9 0%, #9d9d9d 100%);*/
 }
 
 #hero-area {
+    /*Holds the div created in js, which then holds the planet images.*/
+    
     height: 100%;
     width: 100%;
     background: #000;
     position: absolute;
-    top: 0;
 }
 
 #hero-image {
+    /*This is the solar system graphic that fills the page before the first accelerometer check.*/
+    
     height: 100%;
     width: 100%;
     background: no-repeat fixed center/contain;
@@ -195,16 +222,18 @@ body {
     top: 0;
 }
 
-#hero-images {}
-
-#hero-images img {
-    width: 200px;
-    height: 200px;
+#hero-images {
+    /*This is a div that holds all of the planet images.*/
+    
+    height: 100%;
+    width: 100%;
 }
 
-#planet-image {
-    position: absolute;
-    left: 0;
+#hero-images img {
+    /*This is each planet image.*/
+    
+    height: 200px;
+    width: 200px;
 }
 
 #readout {
@@ -213,20 +242,22 @@ body {
 }
 
 #probably {
-    color: #444;
+    /*Deemphasizes the word "probability".*/
+    
+    color: #999;
     font-size: 80%;
     font-weight: 100;
 }
 
 #planet-name {
+    /*Colours the name of the planet.*/
+    
     color: #DB4105;
 }
 
-.slow-rotate {
-    -webkit-animation: rotate 60s linear infinite;
-}
-
 #loading-bar {
+    /*Contains the moon and earth graphics*/
+    
     position: relative;
     height: 100vw;
     width: 100vw;
@@ -236,6 +267,8 @@ body {
 }
 
 #loading-earth {
+    /*Pretty self-explanitory*/
+    
     position: absolute;
     height: 200px;
     width: 200px;
@@ -246,6 +279,8 @@ body {
 }
 
 #loading-moon {
+    /*Pretty self-explanitory*/
+    
     position: absolute;
     height: 50px;
     width: 50px;
@@ -254,16 +289,18 @@ body {
 }
 
 #moon-orbit {
+    /*Pretty self-explanitory*/
+    
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0%;
-    animation: orbit 4s ease-in-out infinite;
-    -webkit-animation: orbit 4s ease-in-out infinite;
+    animation: moon-orbit 4s ease-in-out infinite;
+    -webkit-animation: moon-orbit 4s ease-in-out infinite;
     /* Chrome, Safari, Opera */
 }
 
-@keyframes orbit {
+@keyframes moon-orbit {
     0% {
         transform: rotate(0deg);
     }
@@ -279,7 +316,7 @@ body {
 }
 /* Chrome, Safari, Opera */
 
-@-webkit-keyframes orbit {
+@-webkit-keyframes moon-orbit {
     0% {
         -webkit-transform: rotate(0deg);
     }
